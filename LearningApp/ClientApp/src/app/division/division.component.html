@@ -1,0 +1,6 @@
+<h2>Division</h2>
+<p *ngIf="!questionaires"><em>Loading...</em></p>
+
+<div class="row">
+  <computation-tile operand="{{ questionaire.operand }}" upperNumber="{{ questionaire.upperValue }}" lowerNumber="{{ questionaire.lowerValue }}" *ngFor="let questionaire of questionaires"></computation-tile>
+</div>

@@ -1,0 +1,18 @@
+<div class="col-xs-3 col-md-2">
+  <div class="thumbnail clearfix">
+    <span class="glyphicon glyphicon-question-sign"></span>
+    <div class="operand">{{operand}}</div>
+    <div class="computationNumber">
+      <div>{{upperNumber}}</div>
+      <div class="lowerValueLine">{{lowerNumber}}</div>
+      <input type="text"
+             class="answer-box"
+             maxlength="3"
+             (keyup.enter)="onAnswerSaved($event)"
+             (dblclick)="onAnswerChanged($event)"
+             [(ngModel)]="studentAnswer"
+             (focusout)="onAnswerSaved($event)"
+             id="answerValueBox_{{ questionaireKey }}"/>
+    </div>
+  </div>
+</div>
