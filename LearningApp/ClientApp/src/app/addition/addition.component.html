@@ -1,0 +1,32 @@
+<h2>Addition</h2>
+<div class="row">
+  <input type="text" class="form-control" placeholder="5" [(ngModel)]="totalItems" value="5" style="width:99%"><br />
+  <select id="difficulty" class="form-control" (change)="onDifficultyChanged($event.target.value)" style="width:99%">
+    <option value="" disabled selected>select difficulty</option>
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+</div>
+<br />
+<div *ngIf="questionaires">
+  <div class="row">
+    <div class="progress" style="width:99%">
+      <div class="progress-bar" role="progressbar" attr.aria-valuenow="{{ totalProgressPercentage }}" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': totalProgressPercentage + '%'}">{{ totalProgressPercentage }}%</div>
+    </div>
+    <button class="btn btn-primary" type="button">
+      Total Correct Answers: <span class="badge">{{ totalCorrectAnswerCount }}</span>
+    </button>
+    &nbsp;<span>Start Time: {{ startTime | date:'shortTime' }}, End Time: {{ endTime | date:'shortTime' }}, Total Time (in Minutes): {{ totalTime }}</span>
+  </div>
+  <div class="row">
+    <computation-tile operand="{{ questionaire.operand }}"
+                      upperNumber="{{ questionaire.upperValue }}"
+                      answerNumber="{{ questionaire.answerValue }}"
+                      questionaireKey="{{ questionaire.id }}"
+                      lowerNumber="{{ questionaire.lowerValue }}"
+                      *ngFor="let questionaire of questionaires"
+                      (hasAnsweredCorrectlySaved)=tallyCorrectAnswers($event)></computation-tile>
+  </div>
+</div>
+
