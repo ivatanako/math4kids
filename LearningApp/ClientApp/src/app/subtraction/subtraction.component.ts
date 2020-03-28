@@ -31,8 +31,8 @@ export class SubtractionComponent {
 
   tallyCorrectAnswers(counter) {
     this.totalCorrectAnswerCount += counter;
-    this.totalProgressPercentage = Math.ceil((this.totalCorrectAnswerCount * 100) / this.questionaires.length);
-    if (this.totalCorrectAnswerCount >= this.questionaires.length) {
+    this.totalProgressPercentage = Math.round((this.totalCorrectAnswerCount * 100) / this.questionaires.length);
+    if (this.totalCorrectAnswerCount > this.questionaires.length) {
       this.endTime = new Date();
       this.totalTime = Math.floor((this.endTime.getTime() - this.startTime.getTime()) / 60000);
     }

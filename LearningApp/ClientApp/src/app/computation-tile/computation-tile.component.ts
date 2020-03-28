@@ -21,8 +21,10 @@ export class ComputationTileComponent {
       event.target.disabled = true;
       this.hasAnsweredCorrectlySaved.emit(1);
     }
-    else
-      event.target.style = "border:2px #ff1a1a solid"
+    else {
+      event.target.style = "border:2px #ff1a1a solid";
+
+    }
   }
 
   onAnswerChanged(event) {

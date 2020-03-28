@@ -43,10 +43,20 @@ namespace LearningApp.Controllers
 
             var rng = new Random();
 
+            int minValue = difficultyObj.MaxValue;
+            if (difficulty.Equals("easy"))
+            {
+                minValue = 10;
+            }
+            else if (difficulty.Equals("medium"))
+            {
+                minValue = 50;
+            }
+
             for (int count = 1; count <= items; count++)
             {
                 int _upperValue = rng.Next(difficultyObj.MinValue, difficultyObj.MaxValue);
-                int _lowerValue = rng.Next(difficultyObj.MinValue, difficultyObj.MaxValue);
+                int _lowerValue = rng.Next(difficultyObj.MinValue, minValue);
 
                 if(_lowerValue > _upperValue)
                 {
@@ -76,10 +86,20 @@ namespace LearningApp.Controllers
 
             var rng = new Random();
 
+            int minValue = 10;
+            if (difficulty.Equals("easy"))
+            {
+                minValue = 2;
+            }
+            else if (difficulty.Equals("medium"))
+            {
+                minValue = 5;
+            }
+
             for (int count = 1; count <= items; count++)
             {
                 int _upperValue = rng.Next(difficultyObj.MinValue, difficultyObj.MaxValue);
-                int _lowerValue = rng.Next(difficultyObj.MinValue, 10);
+                int _lowerValue = rng.Next(1, minValue);
 
                 if (_lowerValue > _upperValue)
                 {

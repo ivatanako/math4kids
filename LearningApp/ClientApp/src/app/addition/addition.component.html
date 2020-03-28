@@ -27,6 +27,8 @@
                       lowerNumber="{{ questionaire.lowerValue }}"
                       *ngFor="let questionaire of questionaires"
                       (hasAnsweredCorrectlySaved)=tallyCorrectAnswers($event)></computation-tile>
+    <br />
+    <button class="btn btn-primary" [disabled]="endTime == null" type="button" value="Submit my answers"></button>
   </div>
 </div>
 
