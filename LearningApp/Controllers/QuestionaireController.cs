@@ -89,7 +89,7 @@ namespace LearningApp.Controllers
             int minValue = 10;
             if (difficulty.Equals("easy"))
             {
-                minValue = 2;
+                minValue = 3;
             }
             else if (difficulty.Equals("medium"))
             {
