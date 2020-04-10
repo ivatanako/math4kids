@@ -20,15 +20,19 @@
     &nbsp;<span>Start Time: {{ startTime | date:'shortTime' }}, End Time: {{ endTime | date:'shortTime' }}, Total Time (in Minutes): {{ totalTime }}</span>
   </div>
   <div class="row">
-    <computation-tile operand="{{ questionaire.operand }}"
-                      upperNumber="{{ questionaire.upperValue }}"
-                      answerNumber="{{ questionaire.answerValue }}"
-                      questionaireKey="{{ questionaire.id }}"
-                      lowerNumber="{{ questionaire.lowerValue }}"
-                      *ngFor="let questionaire of questionaires"
-                      (hasAnsweredCorrectlySaved)=tallyCorrectAnswers($event)></computation-tile>
-    <br />
-    <button class="btn btn-primary" [disabled]="endTime == null" type="button" value="Submit my answers"></button>
+      <div *ngFor="let questionaire of questionaires">
+        <computation-tile operand="{{ questionaire.operand }}"
+                          upperNumber="{{ questionaire.upperValue }}"
+                          answerNumber="{{ questionaire.answerValue }}"
+                          questionaireKey="{{ questionaire.id }}"
+                          lowerNumber="{{ questionaire.lowerValue }}"
+                          examId="{{ startTime | date:'full' }}"
+                          (hasAnsweredCorrectlySaved)=tallyCorrectAnswers($event)></computation-tile>
+      </div>
+      <br />
+  </div>
+  <div class="row">
+    <button class="btn btn-primary" [disabled]="!isQuizCompleted" type="button" (click)="onSave()" >Submit my answers</button>
   </div>
 </div>
 

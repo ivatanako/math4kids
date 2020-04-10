@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-subtraction-component',
@@ -15,8 +16,10 @@ export class SubtractionComponent {
   public http: HttpClient;
   public baseUrl: string;
   public totalItems: number;
+  public isQuizCompleted: boolean = false;
+  public resultsArray: Array<any>;
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string, public db: AngularFirestore) {
     this.http = http;
     this.baseUrl = baseUrl;
   }
@@ -25,17 +28,30 @@ export class SubtractionComponent {
     this.startTime = new Date();
 
     this.http.get<Questionaire[]>(this.baseUrl + 'api/Questionaire/Subtraction/' + difficulty + '/' + this.totalItems).subscribe(result => {
+      this.isQuizCompleted = false;
+      this.totalCorrectAnswerCount = 0;
+      this.totalProgressPercentage = 0;
       this.questionaires = result;
+      this.resultsArray = [];
     }, error => console.error(error));
   }
 
-  tallyCorrectAnswers(counter) {
-    this.totalCorrectAnswerCount += counter;
+  tallyCorrectAnswers(answerObj) {
+    this.totalCorrectAnswerCount += answerObj.points;
     this.totalProgressPercentage = Math.round((this.totalCorrectAnswerCount * 100) / this.questionaires.length);
-    if (this.totalCorrectAnswerCount > this.questionaires.length) {
+    this.resultsArray.push(answerObj);
+    if (this.totalCorrectAnswerCount == this.questionaires.length) {
       this.endTime = new Date();
       this.totalTime = Math.floor((this.endTime.getTime() - this.startTime.getTime()) / 60000);
+      this.isQuizCompleted = true;
     }
+  }
+
+  onSave() {
+    for (let result in this.resultsArray) {
+      this.db.collection('subtraction-results').add(this.resultsArray[result]);
+    }
+    this.isQuizCompleted = false;
   }
 }
 

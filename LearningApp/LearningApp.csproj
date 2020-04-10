@@ -28,11 +28,13 @@
   <ItemGroup>
     <None Remove="ClientApp\src\app\addition\addition.component.ts" />
     <None Remove="ClientApp\src\app\computation-tile\computation-tile.component.ts" />
+    <None Remove="ClientApp\src\app\grades\grades.component.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\computation-tile\computation-tile.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\addition\addition.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\grades\grades.component.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
